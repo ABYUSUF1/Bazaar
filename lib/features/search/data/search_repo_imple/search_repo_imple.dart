@@ -4,7 +4,6 @@ import 'package:bazaar/core/utils/errors/failure.dart';
 import 'package:bazaar/features/search/domain/search_repo/search_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/api/api_client.dart';
 import '../../../../core/utils/errors/server_failure.dart';
@@ -13,18 +12,23 @@ import '../../../../core/utils/models/products_details_model/products_details_mo
 class SearchRepoImple implements SearchRepo {
   final ApiClient _apiClient;
 
-  static const String _recentSearchesKey = 'recent_searches';
-
   SearchRepoImple(this._apiClient);
+
+  // we will use shared pref or hive in future ...
+  final List<String> _recentSearches = [];
 
   @override
   Future<Either<Failure, List<ProductsDetailsEntity>>> searchProducts(
       String? query) async {
     try {
       final response = await _apiClient.get(EndPoints.searchProducts(query));
-
       final model =
           ProductsDetailsModel.fromJson(response.data as Map<String, dynamic>);
+
+      // Validate response data
+      if (model.products == null) {
+        return Left(ServerFailure('Products not found in response.'));
+      }
 
       // Create a list of entities from the products
       List<ProductsDetailsEntity> entities = model.products?.map((product) {
@@ -50,59 +54,45 @@ class SearchRepoImple implements SearchRepo {
   @override
   Future<Either<Failure, List<String>>> getRecentSearches() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final searches = prefs.getStringList(_recentSearchesKey) ?? [];
-      return right(searches);
+      return Right(List.unmodifiable(_recentSearches));
     } catch (e) {
-      return left(ServerFailure('Failed to retrieve recent searches.'));
+      return const Left(
+          Failure('An error occurred while fetching recent searches.'));
     }
   }
 
   @override
   Future<Either<Failure, void>> addRecentSearch(String query) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final searches = prefs.getStringList(_recentSearchesKey) ?? [];
-
-      // Remove the query if it already exists to avoid duplication
-      searches.remove(query);
-      searches.insert(0, query); // Add the query at the top
-
-      // Keep only the most recent 5 searches
-      if (searches.length > 5) {
-        searches.removeRange(5, searches.length);
+      if (!_recentSearches.contains(query)) {
+        _recentSearches.add(query);
       }
-
-      await prefs.setStringList(_recentSearchesKey, searches);
       return const Right(null);
     } catch (e) {
-      return left(ServerFailure('Failed to save the search term.'));
+      return const Left(
+          Failure('An error occurred while adding the recent search.'));
     }
   }
 
   @override
   Future<Either<Failure, void>> removeRecentSearch(String query) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final searches = prefs.getStringList(_recentSearchesKey) ?? [];
-
-      searches.remove(query);
-
-      await prefs.setStringList(_recentSearchesKey, searches);
+      _recentSearches.remove(query);
       return const Right(null);
     } catch (e) {
-      return left(ServerFailure('Failed to remove the search term.'));
+      return const Left(
+          Failure('An error occurred while removing the recent search.'));
     }
   }
 
   @override
   Future<Either<Failure, void>> clearRecentSearches() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.remove(_recentSearchesKey);
+      _recentSearches.clear();
       return const Right(null);
     } catch (e) {
-      return left(ServerFailure('Failed to clear recent searches.'));
+      return const Left(
+          Failure('An error occurred while clearing recent searches.'));
     }
   }
 }

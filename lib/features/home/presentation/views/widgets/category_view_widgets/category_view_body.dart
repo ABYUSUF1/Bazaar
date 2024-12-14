@@ -68,7 +68,13 @@ class CategoryViewBody extends StatelessWidget {
             ],
           );
         } else {
-          return const Center(child: CircularProgressIndicator());
+          return SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height / 1.5,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         }
       },
     );

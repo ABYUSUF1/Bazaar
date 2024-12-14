@@ -1,6 +1,8 @@
 import 'package:bazaar/core/utils/responsive_layout.dart';
 import 'package:bazaar/features/cart/presentation/views/widgets/cart_products_list_body.dart';
 import 'package:bazaar/features/cart/presentation/views/widgets/cart_products_list_body_mobile.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_colors.dart';
@@ -17,10 +19,10 @@ class CartProductsList extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const TitleWidget(title: "Cart"),
+        TitleWidget(title: LocaleKeys.home_cart.tr()),
         Text.rich(
           TextSpan(
-            text: "You have ",
+            text: "${LocaleKeys.common_you_have.tr()} ",
             style: AppTextStyles.style14Normal,
             children: <TextSpan>[
               TextSpan(
@@ -28,7 +30,8 @@ class CartProductsList extends StatelessWidget {
                   style: AppTextStyles.style14W600
                       .copyWith(color: AppColors.primaryColor)),
               TextSpan(
-                  text: " in your cart", style: AppTextStyles.style14Normal),
+                  text: " ${LocaleKeys.common_in_your_cart.tr()} ",
+                  style: AppTextStyles.style14Normal),
             ],
           ),
         ),

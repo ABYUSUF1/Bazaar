@@ -1,5 +1,7 @@
 import 'package:bazaar/core/utils/app_text_styles.dart';
 import 'package:bazaar/features/cart/presentation/manager/cart/cart_cubit.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +18,7 @@ class CouponCodeTextField extends StatelessWidget {
           child: TextField(
             controller: context.read<CartCubit>().couponController,
             decoration: InputDecoration(
-              hintText: "Enter Coupon Code",
+              hintText: LocaleKeys.cart_enter_coupon.tr(),
               hintStyle: const TextStyle(
                 color: AppColors.greyColor,
               ),
@@ -52,7 +54,7 @@ class CouponCodeTextField extends StatelessWidget {
         ),
       ),
       child: Text(
-        'Apply',
+        LocaleKeys.common_apply.tr(),
         style: AppTextStyles.style14W600.copyWith(color: AppColors.whiteColor),
       ),
     );

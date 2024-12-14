@@ -1,5 +1,7 @@
 import 'package:bazaar/core/utils/app_colors.dart';
 import 'package:bazaar/features/home/presentation/views/widgets/category_view_widgets/filter_panel/filter_box.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../../core/utils/entities/products_details_entity.dart';
@@ -70,7 +72,7 @@ class _BrandFilterPanelState extends State<BrandFilterPanel> {
         _selectedBrands.isNotEmpty; // Check if any brand is selected
 
     return FilterBox(
-      title: 'Brands',
+      title: LocaleKeys.category_filters_brands.tr(),
       isFilterApplied: isFilterApplied,
       onClear:
           _clearSelectedBrands, // Clear filter when "Clear" button is clicked

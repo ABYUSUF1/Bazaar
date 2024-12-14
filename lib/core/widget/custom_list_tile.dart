@@ -1,3 +1,4 @@
+import 'package:bazaar/core/functions/is_arabic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -30,7 +31,11 @@ class CustomListTile extends StatelessWidget {
         ],
       ),
       trailing: trailingChild ??
-          const Icon(Icons.keyboard_arrow_right_rounded, color: Colors.grey),
+          Icon(
+              isArabic(context)
+                  ? Icons.keyboard_arrow_left_rounded
+                  : Icons.keyboard_arrow_right_rounded,
+              color: Colors.grey),
     );
   }
 }

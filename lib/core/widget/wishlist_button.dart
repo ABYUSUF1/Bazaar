@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bazaar/core/utils/models/products_details_model/product.dart';
-import '../../features/favorite/presentation/manager/favorite/favorite_cubit.dart';
-import '../../features/favorite/presentation/manager/favorite/favorite_state.dart';
+import '../../features/wishlist/presentation/manager/wishlist/wishlist_cubit.dart';
+import '../../features/wishlist/presentation/manager/wishlist/wishlist_state.dart';
 import '../utils/app_assets.dart';
 import '../utils/app_colors.dart';
 
@@ -15,15 +15,15 @@ class FavoriteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FavoriteCubit, FavoriteState>(
+    return BlocBuilder<WishlistCubit, WishlistState>(
       builder: (context, state) {
-        final favoriteCubit = context.read<FavoriteCubit>();
-        final isFavorite = favoriteCubit.isFavorite(product.id.toString());
+        final favoriteCubit = context.read<WishlistCubit>();
+        final isFavorite = favoriteCubit.isWishlist(product.id.toString());
 
         return IconButton(
           onPressed: () {
-            if (state is FavoriteSuccess) {
-              context.read<FavoriteCubit>().toggleFavorite(product);
+            if (state is WishlistSuccess) {
+              context.read<WishlistCubit>().toggleWishlistButton(product);
             }
           },
           style: IconButton.styleFrom(
@@ -40,7 +40,7 @@ class FavoriteButton extends StatelessWidget {
               height: 20,
             ),
           ),
-          tooltip: isFavorite ? 'Remove from favorites' : 'Add to favorites',
+          tooltip: isFavorite ? 'Remove from wishlist' : 'Add to wishlist',
         );
       },
     );

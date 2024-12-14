@@ -1,5 +1,7 @@
-import 'package:bazaar/core/services/payment/paymob/paymob_constant.dart';
+import 'package:bazaar/core/utils/paymob_constant.dart';
 import 'package:bazaar/core/widget/title_widget.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paymob_egypt/flutter_paymob_egypt.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,7 +26,7 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
     super.initState();
     paymentMethods = [
       {
-        "title": "Cash on Delivery",
+        "title": LocaleKeys.cart_cash_on_delivery.tr(),
         "svgIcon": AppAssets.imagesIconsWallet,
         "onTap": () {}
       },
@@ -45,7 +47,7 @@ class _CheckoutPaymentState extends State<CheckoutPayment> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const TitleWidget(title: "Payment"),
+        TitleWidget(title: LocaleKeys.cart_payment.tr()),
         Container(
           width: double.infinity,
           decoration: BoxDecoration(

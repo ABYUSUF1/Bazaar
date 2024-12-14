@@ -5,15 +5,15 @@ import 'package:bazaar/core/utils/models/products_details_model/product.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../core/utils/errors/server_failure.dart';
-import '../../domain/favorite_repo/favorite_repo.dart';
+import '../../domain/favorite_repo/wishlist_repo.dart';
 
-class FavoriteRepoImple implements FavoriteRepo {
+class FavoriteRepoImple implements WishlistRepo {
   final WishlistFirestoreService _firestoreService;
   final FirebaseAuthService _firebaseAuthService;
   FavoriteRepoImple(this._firestoreService, this._firebaseAuthService);
 
   @override
-  Future<Either<Failure, void>> addFavorite(Product product) async {
+  Future<Either<Failure, void>> addToWishlist(Product product) async {
     try {
       await _firestoreService.setDocument(
         _firebaseAuthService.getUserId(),
@@ -27,7 +27,7 @@ class FavoriteRepoImple implements FavoriteRepo {
   }
 
   @override
-  Future<Either<Failure, List<Product>>> fetchFavorites() async {
+  Future<Either<Failure, List<Product>>> fetchWishlist() async {
     try {
       final snapshot = await _firestoreService
           .getCollection(_firebaseAuthService.getUserId());
@@ -41,7 +41,7 @@ class FavoriteRepoImple implements FavoriteRepo {
   }
 
   @override
-  Future<Either<Failure, void>> removeFavorite(String productId) async {
+  Future<Either<Failure, void>> removeFromWishlist(String productId) async {
     try {
       await _firestoreService.deleteDocument(
         _firebaseAuthService.getUserId(),

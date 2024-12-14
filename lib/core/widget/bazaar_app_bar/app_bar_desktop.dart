@@ -12,8 +12,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../features/cart/presentation/manager/cart/cart_cubit.dart';
-import '../../../features/favorite/presentation/manager/favorite/favorite_cubit.dart';
-import '../../../features/search/presentation/views/widgets/search_view_body_desktop.dart';
+import '../../../features/wishlist/presentation/manager/wishlist/wishlist_cubit.dart';
+import '../../../features/search/presentation/views/search_view.dart';
 import '../../utils/app_colors.dart';
 
 class AppBarDesktop extends StatelessWidget {
@@ -49,7 +49,7 @@ class _UpperAppBar extends StatelessWidget {
         InkWell(
           onTap: () {
             // GO TO HOME
-            GoRouter.of(context).go(AppRouter.home);
+            GoRouter.of(context).goNamed(AppRouter.home);
           },
           child: SizedBox(
             width: 150,
@@ -63,7 +63,7 @@ class _UpperAppBar extends StatelessWidget {
         ),
 
         // Search field
-        const SearchViewBodyDesktop(),
+        const Expanded(child: SearchView()),
 
         // Location Button
         const LocationButton(),
@@ -74,13 +74,13 @@ class _UpperAppBar extends StatelessWidget {
           onPressed: () => context.goNamed(AppRouter.wishlist),
           labelText: LocaleKeys.home_wishlist
               .tr(), //! change from wishlist to favorite
-          badgeCount: context.watch<FavoriteCubit>().favoriteProducts.length,
+          badgeCount: context.watch<WishlistCubit>().wishlistProducts.length,
         ),
 
         // Cart Button
         CustomIconBadge(
           svgIcon: AppAssets.imagesIconsCart,
-          onPressed: () => context.pushNamed(AppRouter.cart),
+          onPressed: () => context.goNamed(AppRouter.cart),
           labelText: LocaleKeys.home_cart.tr(),
           badgeCount: context.watch<CartCubit>().cartList.length,
         ),
@@ -88,7 +88,7 @@ class _UpperAppBar extends StatelessWidget {
         // Account Button
         CustomIconBadge(
           svgIcon: AppAssets.imagesIconsProfile,
-          onPressed: () => context.pushNamed(AppRouter.profile),
+          onPressed: () => context.goNamed(AppRouter.profile),
           labelText: LocaleKeys.home_account.tr(),
           badgeCount: 0,
         ),

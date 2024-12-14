@@ -18,9 +18,23 @@ class CodegenLoader extends AssetLoader{
   "common": {
     "or": "أو",
     "back": "رجوع",
-    "no_result_found": "لم يتم العثور على نتائج"
+    "no_result_found": "لم يتم العثور على نتائج",
+    "hi": "مرحبًا,",
+    "you_have": "لديك",
+    "in_your_wishlist": "في قائمة الرغبات الخاصة بك",
+    "in_your_cart": "في سلة التسوق الخاصة بك",
+    "free_delivery": "توصيل مجاني",
+    "get_it_by": "احصل عليه",
+    "or_fastest_delivery": "او التوصيل السريع",
+    "results_for": "نتائج ل",
+    "products": "منتج",
+    "apply": "تأكيد",
+    "free": "مجاني",
+    "item": "عنصر"
   },
   "auth": {
+    "profile": "الملف الشخصي",
+    "update_profile": "تحديث الملف الشخصي",
     "sign_in": "تسجيل الدخول",
     "sign_in_desc": "مرحبًا بعودتك، هل أنت مستعد لاستكشاف؟",
     "email_address": "عنوان البريد الإلكتروني",
@@ -70,7 +84,8 @@ class CodegenLoader extends AssetLoader{
     "AuthFailure_user_cancelled": "تم إلغاء تسجيل الدخول.",
     "AuthFailure_network_request_failed": "خطأ في الشبكة. يرجى التحقق من الاتصال.",
     "AuthFailure_too_many_requests": "عدد الطلبات كبير جدا. حاول مرة أخرى لاحقاً.",
-    "AuthFailure_unexpected_error": "حدث خطأ غير متوقع."
+    "AuthFailure_unexpected_error": "حدث خطأ غير متوقع.",
+    "logout": "تسجيل الخروج"
   },
   "home": {
     "search_hint": "ابحث عن المنتجات",
@@ -88,16 +103,77 @@ class CodegenLoader extends AssetLoader{
     "about_us": "من نحن",
     "categories": "التصنيفات",
     "popular_products": "أشهر المنتجات",
-    "view_all": "عرض الكل"
+    "view_all": "عرض الكل",
+    "orders": "الطلبات",
+    "returns": "المرتجعات",
+    "address": "العنوان",
+    "payment": "الدفع",
+    "wallet": "المحفظة",
+    "personalization": "التفاصيل",
+    "notifications": "الاشعارات",
+    "light_mode": "الوضع الفاتح",
+    "dark_mode": "الوضع الداكن",
+    "settings": "الاعدادات",
+    "language": "اللغة",
+    "location": "الموقع",
+    "help_support": "المساعدة والدعم",
+    "contact_us": "اتصل بنا",
+    "faqs": "الأسئلة الشائعة"
+  },
+  "category_filters": {
+    "price_range": "نطاق السعر",
+    "brands": "الماركات",
+    "rating": "التقييم",
+    "filter": "فلتر",
+    "sort_by_recommended": "ترتيب حسب الاقتراح",
+    "price_high_to_low": "السعر: من الاعلى إلى الأدنى",
+    "price_low_to_high": "السعر: من الأدنى إلى الاعلى",
+    "rating_high_to_low": "التقييم: من الاعلى إلى الأدنى",
+    "rating_low_to_high": "التقييم: من الأدنى إلى الاعلى",
+    "no_brand": "لا يوجد ماركة"
+  },
+  "cart": {
+    "order_summary": "ملخص الطلب",
+    "enter_coupon": "ادخل الكوبون",
+    "coupon_discount": "خصم الكوبون",
+    "sub_total": "المجموع الفرعي",
+    "shipping_fee": "رسوم التوصيل",
+    "total": "المجموع",
+    "checkout": "إتمام الشراء",
+    "paymob_note": "ادفع 6 دفعات شهرية بقيمة 1500 جنيه مصري",
+    "stripe_note": "احصل على خصم 5% عند استخدام Stripe",
+    "place_order": "تأكيد الطلب",
+    "address": "العنوان",
+    "your_address": "عنوانك",
+    "delivery_instructions": "تعليمات التوصيل",
+    "hand_it_directly_to_me": "استلمها مباشرة لي",
+    "leave_it_at_the_door": "اتركها علي الباب",
+    "pick_it_from_store": "خذها من المتجر",
+    "payment": "الدفع",
+    "cash_on_delivery": "الدفع عند الاستلام"
   }
 };
 static const Map<String,dynamic> en = {
   "common": {
     "or": "or",
     "back": "Back",
-    "no_result_found": "No result found"
+    "no_result_found": "No result found",
+    "hi": "Hi,",
+    "you_have": "You have",
+    "in_your_wishlist": "in your wishlist",
+    "in_your_cart": "in your cart",
+    "free_delivery": "Free Delivery",
+    "get_it_by": "Get it by",
+    "or_fastest_delivery": "or fastest delivery",
+    "results_for": "Results for",
+    "products": "Products",
+    "apply": "Apply",
+    "free": "FREE",
+    "item": "Item"
   },
   "auth": {
+    "profile": "Profile",
+    "update_profile": "Update Profile",
     "sign_in": "Sign in",
     "sign_in_desc": "Welcome Back, Ready To Explore?",
     "email_address": "E-Mail Address",
@@ -147,7 +223,8 @@ static const Map<String,dynamic> en = {
     "AuthFailure_user_cancelled": "Sign-in cancelled.",
     "AuthFailure_network_request_failed": "Network error. Please check your connection.",
     "AuthFailure_too_many_requests": "Too many requests. Please try again later.",
-    "AuthFailure_unexpected_error": "An unexpected error occurred."
+    "AuthFailure_unexpected_error": "An unexpected error occurred.",
+    "logout": "Logout"
   },
   "home": {
     "search_hint": "Search for products",
@@ -165,7 +242,54 @@ static const Map<String,dynamic> en = {
     "about_us": "About Us",
     "categories": "Categories",
     "popular_products": "Popular Products",
-    "view_all": "View All"
+    "view_all": "View All",
+    "orders": "Orders",
+    "returns": "Returns",
+    "address": "Address",
+    "payment": "Payment",
+    "wallet": "Wallet",
+    "personalization": "Personalization",
+    "notifications": "Notifications",
+    "light_mode": "Light Mode",
+    "dark_mode": "Dark Mode",
+    "settings": "Settings",
+    "language": "Language",
+    "location": "Location",
+    "help_support": "Help & Support",
+    "contact_us": "Contact Us",
+    "faqs": "FAQs"
+  },
+  "category_filters": {
+    "price_range": "Price Range",
+    "brands": "Brands",
+    "rating": "Rating",
+    "filter": "Filter",
+    "sort_by_recommended": "Sort by: Recommended",
+    "price_high_to_low": "Price: High to Low",
+    "price_low_to_high": "Price: Low to High",
+    "rating_high_to_low": "Rating: High to Low",
+    "rating_low_to_high": "Rating: Low to High",
+    "no_brand": "No Brand"
+  },
+  "cart": {
+    "order_summary": "Order Summary",
+    "enter_coupon": "Enter Coupon",
+    "coupon_discount": "Coupon Discount",
+    "sub_total": "Sub Total",
+    "shipping_fee": "Shipping Fee",
+    "total": "Total",
+    "checkout": "Checkout",
+    "paymob_note": "Pay 6 monthly payments of EGP 1,500",
+    "stripe_note": "Get 5% discount when using Stripe",
+    "place_order": "Place Order",
+    "address": "Address",
+    "your_address": "Your address",
+    "delivery_instructions": "Delivery Instructions",
+    "hand_it_directly_to_me": "Hand it directly to me",
+    "leave_it_at_the_door": "Leave it at the door",
+    "pick_it_from_store": "Pick from Store",
+    "payment": "Payment",
+    "cash_on_delivery": "Cash On Delivery"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};

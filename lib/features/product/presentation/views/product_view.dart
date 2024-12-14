@@ -1,7 +1,7 @@
 import 'package:bazaar/core/utils/app_assets.dart';
 import 'package:bazaar/core/widget/add_to_cart_button.dart';
 import 'package:bazaar/core/widget/custom_scaffold.dart';
-import 'package:bazaar/core/widget/favorite_button.dart';
+import 'package:bazaar/core/widget/wishlist_button.dart';
 import 'package:bazaar/core/widget/no_result_found.dart';
 import 'package:bazaar/core/widget/quantity_button.dart';
 import 'package:bazaar/features/product/presentation/views/widgets/product_view_desktop/product_view_body_desktop.dart';
@@ -15,6 +15,7 @@ import '../manager/get_product/get_product_cubit.dart';
 
 class ProductView extends StatelessWidget {
   final String productId;
+
   const ProductView({
     super.key,
     required this.productId,
@@ -23,6 +24,7 @@ class ProductView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.sizeOf(context).width;
+
     return BlocProvider(
       create: (_) {
         final cubit = GetProductCubit(getIt<ProductRepo>());
@@ -31,48 +33,60 @@ class ProductView extends StatelessWidget {
       },
       child: BlocBuilder<GetProductCubit, GetProductState>(
         builder: (context, state) {
+          Widget body;
+          Widget? bottomNavigationBar;
+
           if (state is GetProductFailure) {
-            return const NoResultFound(
+            body = const NoResultFound(
               lottieImage: AppAssets.lottiesEmptySearch,
-              message: "Empty Product until you find message!",
+              message: "Try Again",
             );
           } else if (state is GetProductSuccess) {
-            // Product loaded successfully, handle UI
-            return CustomScaffold(
-              bottomNavigationBar: width > 1180
-                  ? null
-                  : Padding(
-                      padding: const EdgeInsets.only(
-                          right: 12.0, left: 12.0, bottom: 24.0),
-                      child: Row(
-                        children: [
-                          QuantityButton(
-                              product:
-                                  state.productsDetailsEntity.products![0]),
-                          const SizedBox(width: 10),
-                          Expanded(
-                              child: AddToCartButton(
+            body = width > 1180
+                ? ProductViewBodyDesktop(
+                    productsDetailsEntity: state.productsDetailsEntity,
+                  )
+                : ProductViewBodyMobile(
+                    productsDetailsEntity: state.productsDetailsEntity,
+                  );
+
+            bottomNavigationBar = width > 1180
+                ? null
+                : Padding(
+                    padding: const EdgeInsets.only(
+                        right: 12.0, left: 12.0, bottom: 24.0),
+                    child: Row(
+                      children: [
+                        QuantityButton(
+                          product: state.productsDetailsEntity.products![0],
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: AddToCartButton(
                             product: state.productsDetailsEntity.products![0],
-                          )),
-                          const SizedBox(width: 10),
-                          FavoriteButton(
-                              product:
-                                  state.productsDetailsEntity.products![0]),
-                        ],
-                      ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        FavoriteButton(
+                          product: state.productsDetailsEntity.products![0],
+                        ),
+                      ],
                     ),
-              body: width > 1180
-                  ? ProductViewBodyDesktop(
-                      productsDetailsEntity: state.productsDetailsEntity,
-                    )
-                  : ProductViewBodyMobile(
-                      productsDetailsEntity: state.productsDetailsEntity,
-                    ),
-            );
+                  );
           } else {
-            // Loading state
-            return const Center(child: CircularProgressIndicator());
+            body = SizedBox(
+              width: double.infinity,
+              height: MediaQuery.sizeOf(context).height / 1.5,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
           }
+
+          return CustomScaffold(
+            body: body,
+            bottomNavigationBar: bottomNavigationBar,
+          );
         },
       ),
     );

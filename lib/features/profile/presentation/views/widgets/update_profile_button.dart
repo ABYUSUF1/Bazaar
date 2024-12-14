@@ -1,6 +1,8 @@
 import 'package:bazaar/core/utils/app_colors.dart';
 import 'package:bazaar/core/utils/app_text_styles.dart';
 import 'package:bazaar/features/auth/domain/entities/auth_entity.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,7 +39,7 @@ class UpdateProfileButton extends StatelessWidget {
               child: hasChanges && state is ProfileLoading
                   ? const CircularProgressIndicator(color: AppColors.whiteColor)
                   : Text(
-                      "Update Profile",
+                      LocaleKeys.auth_update_profile.tr(),
                       style: AppTextStyles.style14W600.copyWith(
                         color: AppColors.whiteColor,
                       ),

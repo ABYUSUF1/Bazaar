@@ -3,6 +3,8 @@ import 'package:bazaar/features/profile/domain/repo/profile_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/services/firebase/firebase_auth_service.dart';
+import '../../../../../core/services/get_it_service.dart';
 import 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
@@ -13,6 +15,8 @@ class ProfileCubit extends Cubit<ProfileState> {
     usernameController.addListener(_onInputChange);
     phoneNumberController.addListener(_onInputChange);
     birthdayController.addListener(_onInputChange);
+
+    loadUserData(getIt<FirebaseAuthService>().getUserId());
   }
 
   final usernameController = TextEditingController();

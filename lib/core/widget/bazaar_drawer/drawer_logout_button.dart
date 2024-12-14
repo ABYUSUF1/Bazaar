@@ -3,6 +3,8 @@ import 'package:bazaar/core/utils/app_text_styles.dart';
 import 'package:bazaar/core/widget/custom_snack_bar.dart';
 import 'package:bazaar/features/auth/domain/repo/auth_repo.dart';
 import 'package:bazaar/features/auth/presentation/manager/sign_out/sign_out_cubit.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -51,7 +53,7 @@ class DrawerLogoutButton extends StatelessWidget {
                           color: AppColors.whiteColor),
                       const SizedBox(width: 20),
                       Text(
-                        'Logout',
+                        LocaleKeys.auth_logout.tr(),
                         style: AppTextStyles.style12Normal
                             .copyWith(color: AppColors.whiteColor),
                       ),

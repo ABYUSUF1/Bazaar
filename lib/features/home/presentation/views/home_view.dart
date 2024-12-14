@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/services/firebase/firebase_auth_service.dart';
 import '../../../../core/services/get_it_service.dart';
+import '../../../cart/domain/repo/cart_repo.dart';
+import '../../../cart/presentation/manager/cart/cart_cubit.dart';
 import '../../../profile/presentation/manager/profile/profile_cubit.dart';
 import '../../domain/home_repo/home_repo.dart';
 import 'widgets/home_view_widgets/home_view_body.dart';
@@ -14,22 +16,26 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
-      body: BlocProvider(
-        create: (context) {
-          final cubit = GetPopularProductsCubit(getIt<HomeRepo>());
-          cubit.getPopularProducts();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) {
+            final cubit = GetPopularProductsCubit(getIt<HomeRepo>());
+            cubit.getPopularProducts();
 
-          context
-              .read<ProfileCubit>()
-              .loadUserData(getIt<FirebaseAuthService>().getUserId());
+            // context
+            //     .read<ProfileCubit>()
+            //     .loadUserData(getIt<FirebaseAuthService>().getUserId());
 
-          // context.read<CartCubit>().getCartItems();
+            // context.read<CartCubit>().getCartItems();
 
-          // context.read<FavoriteCubit>().loadFavorites();
-          return cubit;
-        },
-        child: const HomeViewBody(),
+            // context.read<FavoriteCubit>().loadFavorites();
+            return cubit;
+          },
+        ),
+      ],
+      child: const CustomScaffold(
+        body: HomeViewBody(),
       ),
     );
   }

@@ -3,6 +3,8 @@ import 'package:bazaar/core/utils/responsive_layout.dart';
 import 'package:bazaar/features/cart/presentation/manager/cart/cart_cubit.dart';
 import 'package:bazaar/features/cart/presentation/views/widgets/cart_products_calculation.dart';
 import 'package:bazaar/features/cart/presentation/views/widgets/coupon_code_text_field.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_colors.dart';
@@ -32,7 +34,7 @@ class CartOrderSummary extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              'Order Summary',
+              LocaleKeys.cart_order_summary.tr(),
               style: AppTextStyles.style20Bold
                   .copyWith(color: AppColors.foregroundColor),
             ),

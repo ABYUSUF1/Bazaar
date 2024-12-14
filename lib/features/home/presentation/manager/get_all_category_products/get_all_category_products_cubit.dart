@@ -1,7 +1,6 @@
 import 'package:bazaar/core/utils/entities/products_details_entity.dart';
 import 'package:bazaar/features/home/domain/home_repo/home_repo.dart';
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'get_all_category_products_state.dart';
 
@@ -40,6 +39,7 @@ class GetAllCategoryProductsCubit extends Cubit<GetAllCategoryProductsState> {
   void filterProducts() {
     emit(GetAllCategoryProductsLoading());
 
+    // Use a single pass for filtering
     final filteredProducts = _originalCategoryProductsList.where((entity) {
       final matchesPrice = entity.products!.any((product) =>
           product.price! >= _minPrice && product.price! <= _maxPrice);
@@ -61,7 +61,6 @@ class GetAllCategoryProductsCubit extends Cubit<GetAllCategoryProductsState> {
   void _emitFilteredAndSortedProducts(
       List<ProductsDetailsEntity> filteredProducts) {
     final sortedProducts = _sortProducts(filteredProducts);
-
     final limitedProducts = sortedProducts.take(_productDisplayLimit).toList();
 
     final limitedCount = limitedProducts.fold<int>(
@@ -73,7 +72,7 @@ class GetAllCategoryProductsCubit extends Cubit<GetAllCategoryProductsState> {
       categoryProductsList: limitedProducts,
       filteredProductCount: limitedCount,
       sortCriteria: _sortCriteria,
-      productDisplayLimit: _productDisplayLimit, // Pass the display limit here
+      productDisplayLimit: _productDisplayLimit,
     ));
   }
 
@@ -81,51 +80,38 @@ class GetAllCategoryProductsCubit extends Cubit<GetAllCategoryProductsState> {
       List<ProductsDetailsEntity> products) {
     switch (_sortCriteria) {
       case 'PriceHighToLow':
-        products.sort((a, b) {
-          final aPrice =
-              a.products?.map((e) => e.price ?? 0).reduce((a, b) => a + b) ?? 0;
-          final bPrice =
-              b.products?.map((e) => e.price ?? 0).reduce((a, b) => a + b) ?? 0;
-          return bPrice.compareTo(aPrice);
-        });
+        products.sort((a, b) => _compareByTotalPrice(b, a));
         break;
       case 'PriceLowToHigh':
-        products.sort((a, b) {
-          final aPrice =
-              a.products?.map((e) => e.price ?? 0).reduce((a, b) => a + b) ?? 0;
-          final bPrice =
-              b.products?.map((e) => e.price ?? 0).reduce((a, b) => a + b) ?? 0;
-          return aPrice.compareTo(bPrice);
-        });
+        products.sort((a, b) => _compareByTotalPrice(a, b));
         break;
       case 'Rating':
-        // Sort by rating from high to low
-        products.sort((a, b) {
-          final aRating =
-              a.products?.map((e) => e.rating ?? 0).reduce((a, b) => a + b) ??
-                  0;
-          final bRating =
-              b.products?.map((e) => e.rating ?? 0).reduce((a, b) => a + b) ??
-                  0;
-          return bRating.compareTo(aRating); // High to low
-        });
+        products.sort((a, b) => _compareByTotalRating(b, a));
         break;
-      case 'RatingLowToHigh': // Add a case for low to high rating
-        products.sort((a, b) {
-          final aRating =
-              a.products?.map((e) => e.rating ?? 0).reduce((a, b) => a + b) ??
-                  0;
-          final bRating =
-              b.products?.map((e) => e.rating ?? 0).reduce((a, b) => a + b) ??
-                  0;
-          return aRating.compareTo(bRating); // Low to high
-        });
+      case 'RatingLowToHigh':
+        products.sort((a, b) => _compareByTotalRating(a, b));
         break;
       default:
         // Keep recommended order or default sorting
         break;
     }
     return products;
+  }
+
+  int _compareByTotalPrice(ProductsDetailsEntity a, ProductsDetailsEntity b) {
+    final aPrice =
+        a.products?.map((e) => e.price ?? 0).reduce((a, b) => a + b) ?? 0;
+    final bPrice =
+        b.products?.map((e) => e.price ?? 0).reduce((a, b) => a + b) ?? 0;
+    return aPrice.compareTo(bPrice);
+  }
+
+  int _compareByTotalRating(ProductsDetailsEntity a, ProductsDetailsEntity b) {
+    final aRating =
+        a.products?.map((e) => e.rating ?? 0).reduce((a, b) => a + b) ?? 0;
+    final bRating =
+        b.products?.map((e) => e.rating ?? 0).reduce((a, b) => a + b) ?? 0;
+    return aRating.compareTo(bRating);
   }
 
   // Setter for sort criteria

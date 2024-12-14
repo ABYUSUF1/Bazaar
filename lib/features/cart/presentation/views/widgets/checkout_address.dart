@@ -1,3 +1,5 @@
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -13,7 +15,7 @@ class CheckoutAddress extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const TitleWidget(title: "Address"),
+        TitleWidget(title: LocaleKeys.cart_address.tr()),
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -24,11 +26,11 @@ class CheckoutAddress extends StatelessWidget {
             leading: SvgPicture.asset(AppAssets.imagesIconsLocation,
                 width: 25, height: 25),
             title: Text(
-              "Your Address",
+              LocaleKeys.cart_your_address.tr(),
               style: AppTextStyles.style14Normal,
             ),
             subtitle: Text(
-                "الحي السابع مدينة بدر الاندلس عمارة 831الدور الاول شقة 14",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.style14W600),

@@ -32,8 +32,13 @@ class HomeAllCategoriesBodyDesktop extends StatelessWidget {
           final category = categoriesList[index];
           return InkWell(
             onTap: () {
-              context.goNamed(AppRouter.category,
-                  pathParameters: {'slug': category.slug!});
+              context.goNamed(
+                AppRouter.category,
+                pathParameters: {'slug': category.slug!},
+                extra: isArabic(context)
+                    ? category.localizedTitle!.ar!
+                    : category.localizedTitle!.en!,
+              );
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

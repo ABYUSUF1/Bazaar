@@ -1,20 +1,24 @@
 part of 'search_cubit.dart';
 
-@immutable
-sealed class SearchState {}
+abstract class SearchState {}
 
 class SearchInitial extends SearchState {}
 
 class SearchLoading extends SearchState {}
 
+// Add the new property to the state
 class SearchSuccess extends SearchState {
   final List<ProductsDetailsEntity> products;
+  final List<String> recentSearches;
 
-  SearchSuccess({required this.products});
+  SearchSuccess({
+    required this.products,
+    required this.recentSearches,
+  });
 }
 
 class SearchFailure extends SearchState {
-  final String errMessage;
+  final String errorMessage;
 
-  SearchFailure({required this.errMessage});
+  SearchFailure({required this.errorMessage});
 }

@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../features/favorite/presentation/manager/favorite/favorite_cubit.dart';
-import '../../../features/search/presentation/views/widgets/custom_text_field_mobile.dart';
+import '../../../features/wishlist/presentation/manager/wishlist/wishlist_cubit.dart';
+import '../../../features/search/presentation/views/search_view.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_router.dart';
 
@@ -34,7 +34,7 @@ class AppBarMobile extends StatelessWidget {
           centerTitle: true,
           title: GestureDetector(
             onTap: () {
-              (context).go(AppRouter.home);
+              (context).goNamed(AppRouter.home);
             },
             child: SizedBox(
               width: 90,
@@ -54,17 +54,17 @@ class AppBarMobile extends StatelessWidget {
               svgIcon: AppAssets.imagesIconsWishlist,
               onPressed: () => context.goNamed(AppRouter.wishlist),
               badgeCount:
-                  context.watch<FavoriteCubit>().favoriteProducts.length,
+                  context.watch<WishlistCubit>().wishlistProducts.length,
             ),
 
             CustomIconBadge(
               svgIcon: AppAssets.imagesIconsCart,
-              onPressed: () => context.pushNamed(AppRouter.cart),
+              onPressed: () => context.goNamed(AppRouter.cart),
               badgeCount: context.watch<CartCubit>().cartList.length,
             ),
           ],
         ),
-        const CustomSearchFieldMobile(),
+        const SearchView(),
         const SizedBox(height: 20),
       ],
     );

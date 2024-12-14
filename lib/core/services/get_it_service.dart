@@ -1,7 +1,7 @@
 import 'package:bazaar/core/services/firebase/firestore_service.dart';
 import 'package:bazaar/features/cart/data/repo_imple/cart_repo_imple.dart';
-import 'package:bazaar/features/favorite/data/favorite_repo_imple/favorite_repo_imple.dart';
-import 'package:bazaar/features/favorite/domain/favorite_repo/favorite_repo.dart';
+import 'package:bazaar/features/wishlist/data/wishlist_repo_imple/wishlist_repo_imple.dart';
+import 'package:bazaar/features/wishlist/domain/favorite_repo/wishlist_repo.dart';
 import 'package:bazaar/features/product/data/repo_imple/product_repo_imple.dart';
 import 'package:bazaar/features/product/domain/repo/product_repo.dart';
 import 'package:bazaar/features/profile/data/repo_imple/profile_repo_imple.dart';
@@ -38,6 +38,6 @@ void setupGetIt() {
 
   getIt.registerSingleton<SearchRepo>(SearchRepoImple(DioApiClient(Dio())));
 
-  getIt.registerSingleton<FavoriteRepo>(
+  getIt.registerSingleton<WishlistRepo>(
       FavoriteRepoImple(WishlistFirestoreService(), FirebaseAuthService()));
 }

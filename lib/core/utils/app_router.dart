@@ -2,7 +2,7 @@ import 'package:bazaar/features/auth/presentation/views/auth_view.dart';
 import 'package:bazaar/features/cart/presentation/manager/cart/cart_cubit.dart';
 import 'package:bazaar/features/cart/presentation/views/cart_view.dart';
 import 'package:bazaar/features/cart/presentation/views/checkout_view.dart';
-import 'package:bazaar/features/favorite/presentation/views/favorite_view.dart';
+import 'package:bazaar/features/wishlist/presentation/views/wishlist_view.dart';
 import 'package:bazaar/features/home/presentation/views/category_view.dart';
 import 'package:bazaar/features/profile/presentation/views/profile_view.dart';
 import 'package:go_router/go_router.dart';
@@ -45,7 +45,9 @@ abstract class AppRouter {
             name: AppRouter.category,
             builder: (context, state) {
               final String slug = state.pathParameters['slug'] ?? '';
-              return CategoryView(slug: slug);
+              final title = state.extra.toString();
+
+              return CategoryView(slug: slug, categoryTitle: title);
             },
           ),
         ],
@@ -87,7 +89,7 @@ abstract class AppRouter {
       GoRoute(
         path: AppRouter.wishlist,
         name: AppRouter.wishlist,
-        builder: (context, state) => const FavoriteView(),
+        builder: (context, state) => const WishlistView(),
       ),
       GoRoute(
         path: AppRouter.profile,

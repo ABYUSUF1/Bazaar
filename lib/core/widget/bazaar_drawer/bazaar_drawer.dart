@@ -16,32 +16,35 @@ class BazaarDrawer extends StatelessWidget {
       width: 300,
       child: SafeArea(
           child: SingleChildScrollView(
-        child: Column(
-          children: [
-            ///* Profile Section [Header]
-            DrawerProfileSection(),
-            Divider(),
-            SizedBox(height: 20),
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 14.0),
+          child: Column(
+            children: [
+              ///* Profile Section [Header]
+              DrawerProfileSection(),
+              Divider(),
+              SizedBox(height: 20),
 
-            ///* Account Section
-            DrawerAccountSection(),
-            SizedBox(height: 20),
+              ///* Account Section
+              DrawerAccountSection(),
+              SizedBox(height: 20),
 
-            //* personalization Section
-            DrawerPersonalizationSection(),
-            SizedBox(height: 20),
+              //* personalization Section
+              DrawerPersonalizationSection(),
+              SizedBox(height: 20),
 
-            ///* Settings Section
-            DrawerSettingsSection(),
-            SizedBox(height: 20),
+              ///* Settings Section
+              DrawerSettingsSection(),
+              SizedBox(height: 20),
 
-            ///* Help & Support Section
-            DrawerHelpAndSupportSection(),
-            SizedBox(height: 40),
+              ///* Help & Support Section
+              DrawerHelpAndSupportSection(),
+              SizedBox(height: 40),
 
-            ///* Logout Button
-            DrawerLogoutButton(),
-          ],
+              ///* Logout Button
+              DrawerLogoutButton(),
+            ],
+          ),
         ),
       )),
     );

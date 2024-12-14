@@ -6,9 +6,15 @@ import '../utils/app_text_styles.dart';
 
 class NoResultFound extends StatelessWidget {
   final String lottieImage;
+  final double height;
+  final double width;
   final String message;
   const NoResultFound(
-      {super.key, required this.lottieImage, required this.message});
+      {super.key,
+      required this.lottieImage,
+      required this.message,
+      this.width = 200,
+      this.height = 200});
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +22,8 @@ class NoResultFound extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const SizedBox(height: 100),
-        Lottie.asset(lottieImage, alignment: Alignment.center),
-        const SizedBox(
-          height: 16,
-        ),
+        Lottie.asset(lottieImage,
+            alignment: Alignment.center, width: width, height: height),
         Text(
           message,
           textAlign: TextAlign.center,

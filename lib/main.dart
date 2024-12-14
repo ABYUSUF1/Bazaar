@@ -1,8 +1,9 @@
 import 'package:bazaar/core/themes/light_theme.dart';
+import 'package:bazaar/core/widget/restart_widget.dart';
 import 'package:bazaar/features/cart/domain/repo/cart_repo.dart';
 import 'package:bazaar/features/cart/presentation/manager/cart/cart_cubit.dart';
-import 'package:bazaar/features/favorite/domain/favorite_repo/favorite_repo.dart';
-import 'package:bazaar/features/favorite/presentation/manager/favorite/favorite_cubit.dart';
+import 'package:bazaar/features/wishlist/domain/favorite_repo/wishlist_repo.dart';
+import 'package:bazaar/features/wishlist/presentation/manager/wishlist/wishlist_cubit.dart';
 import 'package:bazaar/features/profile/domain/repo/profile_repo.dart';
 import 'package:bazaar/features/profile/presentation/manager/profile/profile_cubit.dart';
 import 'package:bazaar/features/search/presentation/manager/cubit/search_cubit.dart';
@@ -32,8 +33,7 @@ Future<void> main() async {
     supportedLocales: const <Locale>[Locale('en'), Locale('ar')],
     path: 'assets/localization/',
     assetLoader: const CodegenLoader(),
-    // In first i was adding languages but i realized that the api only have english
-    startLocale: const Locale('en'),
+    // startLocale: const Locale('ar'),
     child: DevicePreview(builder: (context) {
       return const BazaarApp();
     }),
@@ -58,25 +58,31 @@ class BazaarApp extends StatelessWidget {
           create: (context) => SearchCubit(getIt<SearchRepo>()),
         ),
         BlocProvider(
-          create: (context) => FavoriteCubit(getIt<FavoriteRepo>()),
+          create: (context) => WishlistCubit(getIt<WishlistRepo>()),
         ),
       ],
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: 'Bazaar',
-        theme: lightTheme,
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: context.locale,
-        routeInformationParser: AppRouter.appRouter.routeInformationParser,
-        routeInformationProvider: AppRouter.appRouter.routeInformationProvider,
-        routerDelegate: AppRouter.appRouter.routerDelegate,
+      child: RestartWidget(
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Bazaar',
+          theme: lightTheme,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
+          routeInformationParser: AppRouter.appRouter.routeInformationParser,
+          routeInformationProvider:
+              AppRouter.appRouter.routeInformationProvider,
+          routerDelegate: AppRouter.appRouter.routerDelegate,
+        ),
       ),
     );
   }
 }
 
-//! Some updates need to do
-//  صلي الاول
 
-//* Deal with Loading !!!!
+// ! need update !
+
+// 1- filter button in mobile doesnt include sort by
+// 2- search feature !
+// 3- we make Failure class not abstract , so we can use it for normal errMessage
+// 4- NoResult widget in cart and wishlist screens

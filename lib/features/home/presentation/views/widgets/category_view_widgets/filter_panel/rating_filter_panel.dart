@@ -1,5 +1,7 @@
 import 'package:bazaar/core/utils/app_colors.dart';
 import 'package:bazaar/features/home/presentation/views/widgets/category_view_widgets/filter_panel/filter_box.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../manager/get_all_category_products/get_all_category_products_cubit.dart';
@@ -20,7 +22,7 @@ class _RatingFilterPanelState extends State<RatingFilterPanel> {
         _currentRating > 1.0; // Check if rating filter is active
 
     return FilterBox(
-      title: 'Rating',
+      title: LocaleKeys.category_filters_rating.tr(),
       isFilterApplied: isFilterApplied,
       onClear: () {
         setState(() {

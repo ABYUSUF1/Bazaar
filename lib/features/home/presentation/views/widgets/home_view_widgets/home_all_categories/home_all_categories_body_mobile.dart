@@ -40,7 +40,10 @@ class HomeAllCategoriesBodyMobile extends StatelessWidget {
               return InkWell(
                 onTap: () {
                   context.goNamed(AppRouter.category,
-                      pathParameters: {'slug': category.slug!});
+                      pathParameters: {'slug': category.slug!},
+                      extra: isArabic(context)
+                          ? category.localizedTitle!.ar!
+                          : category.localizedTitle!.en!);
                 },
                 child: Column(
                   children: [

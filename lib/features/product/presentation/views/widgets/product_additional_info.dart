@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/models/products_details_model/product.dart';
 import '../../../../../core/widget/add_to_cart_button.dart';
-import '../../../../../core/widget/favorite_button.dart';
+import '../../../../../core/widget/wishlist_button.dart';
 import '../../../../../core/widget/quantity_button.dart';
 
 class ProductAdditionalInfo extends StatelessWidget {

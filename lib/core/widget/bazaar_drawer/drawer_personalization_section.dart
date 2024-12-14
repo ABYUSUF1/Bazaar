@@ -1,5 +1,8 @@
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../functions/is_arabic.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_text_styles.dart';
 import '../custom_list_tile.dart';
@@ -13,14 +16,18 @@ class DrawerPersonalizationSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 16.0),
-          child: Text("Personalization", style: AppTextStyles.style14W600),
+          padding: EdgeInsets.only(
+              left: isArabic(context) ? 0.0 : 16.0,
+              right: isArabic(context) ? 16.0 : 0.0),
+          child: Text(LocaleKeys.home_personalization.tr(),
+              style: AppTextStyles.style14W600),
         ),
         const SizedBox(height: 10),
-        const Column(children: [
+        Column(children: [
           CustomListTile(
-              title: "Notification", svgIcon: AppAssets.imagesIconsOrders),
-          DarkModeToggle(),
+              title: LocaleKeys.home_notifications.tr(),
+              svgIcon: AppAssets.imagesIconsOrders),
+          const DarkModeToggle(),
         ]),
       ],
     );
@@ -36,7 +43,9 @@ class DarkModeToggle extends StatefulWidget {
 
 class _DarkModeToggleState extends State<DarkModeToggle> {
   bool _isDarkMode = false;
-  String get _toggleText => _isDarkMode ? "Dark Mode" : "Light Mode";
+  String get _toggleText => _isDarkMode
+      ? LocaleKeys.home_dark_mode.tr()
+      : LocaleKeys.home_light_mode.tr();
   String get _toggleIcon => _isDarkMode
       ? AppAssets.imagesIconsDarkMode
       : AppAssets.imagesIconsLightMode;

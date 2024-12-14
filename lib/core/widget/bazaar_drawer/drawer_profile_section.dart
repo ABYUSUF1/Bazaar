@@ -1,7 +1,10 @@
+import 'package:bazaar/core/functions/is_arabic.dart';
 import 'package:bazaar/core/utils/app_colors.dart';
 import 'package:bazaar/core/utils/app_text_styles.dart';
 import 'package:bazaar/features/profile/presentation/manager/profile/profile_cubit.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -36,18 +39,23 @@ class DrawerProfileSection extends StatelessWidget {
                     const Icon(Icons.error, color: AppColors.errorColor),
               ),
             ),
-            title: Text.rich(TextSpan(children: [
-              TextSpan(
-                  text: 'Hi,',
-                  style: AppTextStyles.style10NormalLightGrey
-                      .copyWith(color: AppColors.foregroundColor)),
-              TextSpan(
-                  text: ' ${authEntity.username}',
-                  style: AppTextStyles.style14Normal),
-            ])),
+            title: Text.rich(TextSpan(
+              children: [
+                TextSpan(
+                    text: LocaleKeys.common_hi.tr(),
+                    style: AppTextStyles.style10NormalLightGrey
+                        .copyWith(color: AppColors.foregroundColor)),
+                TextSpan(
+                    text: ' ${authEntity.username}',
+                    style: AppTextStyles.style14Normal),
+              ],
+            )),
             subtitle: Text(authEntity.email,
                 style: AppTextStyles.style10NormalLightGrey),
-            trailing: const Icon(Icons.keyboard_arrow_right_rounded,
+            trailing: Icon(
+                isArabic(context)
+                    ? Icons.keyboard_arrow_left_rounded
+                    : Icons.keyboard_arrow_right_rounded,
                 color: AppColors.greyColor),
           );
         }

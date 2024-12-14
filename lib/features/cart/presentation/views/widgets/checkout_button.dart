@@ -1,5 +1,7 @@
 import 'package:bazaar/core/utils/app_text_styles.dart';
 import 'package:bazaar/features/cart/presentation/manager/cart/cart_cubit.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -31,7 +33,7 @@ class CheckoutButton extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Column(
                 children: [
-                  Text("Total",
+                  Text(LocaleKeys.cart_total.tr(),
                       style: AppTextStyles.style14Normal
                           .copyWith(color: AppColors.whiteColor)),
                   Text(
@@ -44,7 +46,7 @@ class CheckoutButton extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: Text("CHECKOUT",
+              child: Text(LocaleKeys.cart_checkout.tr(),
                   style: AppTextStyles.style20Bold
                       .copyWith(color: AppColors.whiteColor)),
             ),

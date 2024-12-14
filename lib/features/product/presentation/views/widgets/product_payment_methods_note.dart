@@ -1,5 +1,7 @@
 import 'package:bazaar/core/utils/app_assets.dart';
 import 'package:bazaar/core/utils/app_text_styles.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -14,10 +16,10 @@ class ProductPaymentMethodsNote extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
-        _buildPaymentMethod("Pay 6 monthly payments of EGP 1,500",
+        _buildPaymentMethod(LocaleKeys.cart_paymob_note.tr(),
             AppAssets.imagesPaymentsPaymob, context),
         const SizedBox(height: 10),
-        _buildPaymentMethod("Get 5% discount when using Stripe",
+        _buildPaymentMethod(LocaleKeys.cart_stripe_note.tr(),
             AppAssets.imagesPaymentsStripe, context),
       ],
     );

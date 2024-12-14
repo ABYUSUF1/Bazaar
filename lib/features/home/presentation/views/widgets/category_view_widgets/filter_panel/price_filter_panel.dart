@@ -1,5 +1,7 @@
 import 'package:bazaar/core/utils/app_colors.dart';
 import 'package:bazaar/features/home/presentation/views/widgets/category_view_widgets/filter_panel/filter_box.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +23,7 @@ class _PriceFilterPanelState extends State<PriceFilterPanel> {
     final isFilterApplied = _minPrice != 0 || _maxPrice != 2000;
 
     return FilterBox(
-      title: 'Price Range',
+      title: LocaleKeys.category_filters_price_range.tr(),
       isFilterApplied: isFilterApplied,
       onClear: () {
         setState(() {

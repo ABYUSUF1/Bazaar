@@ -1,5 +1,7 @@
 import 'package:bazaar/core/utils/app_colors.dart';
 import 'package:bazaar/core/utils/responsive_layout.dart';
+import 'package:bazaar/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../core/utils/app_text_styles.dart';
@@ -61,7 +63,7 @@ class CategoryHeader extends StatelessWidget {
             style: AppTextStyles.style14W600
                 .copyWith(color: AppColors.primaryColor),
           ),
-          const TextSpan(text: "For Results "),
+          TextSpan(text: "${LocaleKeys.common_results_for.tr()} "),
           TextSpan(text: '"$categoryName"', style: AppTextStyles.style14W600),
         ],
       ),
@@ -92,7 +94,7 @@ class CategoryHeaderMobile extends StatelessWidget {
           minimumSize: const Size(90, 40),
         ),
         label: Text(
-          "Filter",
+          LocaleKeys.category_filters_filter.tr(),
           style: AppTextStyles.style12BoldLightGrey
               .copyWith(color: AppColors.whiteColor),
         ),
@@ -145,22 +147,26 @@ class _CategoryHeaderDesktop extends StatelessWidget {
         const SizedBox(width: 12),
         _buildDropdown<String>(
           value: currentSortCriteria,
-          items: const {
-            "Recommended": "Sort by: Recommended",
-            "PriceHighToLow": "Price: High to Low",
-            "PriceLowToHigh": "Price: Low to High",
-            "Rating": "Rating: High to Low",
-            "RatingLowToHigh": "Rating: Low to High",
+          items: {
+            "Recommended": LocaleKeys.category_filters_sort_by_recommended.tr(),
+            "PriceHighToLow":
+                LocaleKeys.category_filters_price_high_to_low.tr(),
+            "PriceLowToHigh":
+                LocaleKeys.category_filters_price_low_to_high.tr(),
+            "RatingHighToLow":
+                LocaleKeys.category_filters_rating_high_to_low.tr(),
+            "RatingLowToHigh":
+                LocaleKeys.category_filters_rating_low_to_high.tr(),
           },
           onChanged: onSortSelected,
         ),
         const SizedBox(width: 12),
         _buildDropdown<int>(
           value: currentProductDisplayLimit,
-          items: const {
-            50: "50 products",
-            100: "100 products",
-            150: "150 products",
+          items: {
+            50: "50 ${LocaleKeys.common_products.tr()}",
+            100: "100 ${LocaleKeys.common_products.tr()}",
+            150: "150 ${LocaleKeys.common_products.tr()}",
           },
           onChanged: onProductLengthSelected,
         ),

@@ -1,14 +1,13 @@
 import 'package:bazaar/core/utils/app_router.dart';
 import 'package:bazaar/core/utils/app_text_styles.dart';
 import 'package:bazaar/core/widget/delivery_info.dart';
-import 'package:bazaar/core/widget/favorite_button.dart';
+import 'package:bazaar/core/widget/wishlist_button.dart';
 import 'package:bazaar/core/widget/quantity_button.dart';
 import 'package:bazaar/features/product/presentation/views/widgets/product_price_and_discount.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/models/products_details_model/product.dart';
@@ -129,22 +128,6 @@ class CartProductsListBody extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-
-  Row _deliveryInfo() {
-    DateTime standardDeliveryDate = DateTime.now().add(const Duration(days: 1));
-    String standardDeliveryFormatted =
-        DateFormat('dd MMM').format(standardDeliveryDate);
-    return Row(
-      children: <Text>[
-        Text("Get it by ", style: AppTextStyles.style12Normal),
-        Text(
-          standardDeliveryFormatted,
-          style: AppTextStyles.style12BoldLightGrey
-              .copyWith(color: AppColors.foregroundColor),
-        ),
-      ],
     );
   }
 }

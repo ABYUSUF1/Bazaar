@@ -1,7 +1,7 @@
 import 'package:bazaar/core/functions/get_color_for_rating.dart';
 import 'package:bazaar/core/utils/app_router.dart';
 import 'package:bazaar/core/utils/app_text_styles.dart';
-import 'package:bazaar/core/widget/favorite_button.dart';
+import 'package:bazaar/core/widget/wishlist_button.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

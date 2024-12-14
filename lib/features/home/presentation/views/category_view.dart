@@ -9,12 +9,12 @@ import 'widgets/category_view_widgets/category_view_body.dart';
 
 class CategoryView extends StatelessWidget {
   final String slug;
-  const CategoryView({super.key, required this.slug});
+  final String categoryTitle;
+  const CategoryView(
+      {super.key, required this.slug, required this.categoryTitle});
 
   @override
   Widget build(BuildContext context) {
-    // make first letter capital
-    final categoryTitle = slug[0].toUpperCase() + slug.substring(1);
     return CustomScaffold(
         body: BlocProvider(
       create: (context) {

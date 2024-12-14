@@ -1,6 +1,5 @@
 part of 'get_all_category_products_cubit.dart';
 
-@immutable
 sealed class GetAllCategoryProductsState {}
 
 class GetAllCategoryProductsInitial extends GetAllCategoryProductsState {}

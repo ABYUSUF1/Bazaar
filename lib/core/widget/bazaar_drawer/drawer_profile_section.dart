@@ -37,6 +37,8 @@ class DrawerProfileSection extends StatelessWidget {
                 height: 40,
                 errorWidget: (context, url, error) =>
                     const Icon(Icons.error, color: AppColors.errorColor),
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
               ),
             ),
             title: Text.rich(TextSpan(
